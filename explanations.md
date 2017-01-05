@@ -197,3 +197,48 @@ Given two nodes in BST, find the least common ancestor in the BST
     * Runtime: O(n^2) - O(n^2) to build a BST, O(height) (height <= n) to search BST
     * Space: O(n) - O(n) to save nodes, and O(n) to save children info
 
+
+## Question 5: The mth element from the end in a linked list
+
+Given a linked list and the number expresses mth, find the mth element from the end.
+
+### Considerations
+
+- Input and Output
+
+    * Input: a linked list and integer (mth)
+    * Output: a value(integer) of the mth element from the end
+
+- Assumptions
+
+    * the integer for mth is zero or positive
+    * the integer for mth is less than the length of the linked list
+    * if no node is found, return value is -1
+
+- Edge case
+
+    * Given linked list is None
+
+- Solution
+
+    The solution uses a recursive call.
+
+    1. Iterates to the end to find the length of the linked list
+    2. When it reaches to the end, returns [-1, None].
+        the first element is a reverse order, the second element is a Node
+    3. While coming back to the head, counts up a reverse order and compares m and n.
+        if m and n are the same, saves current node to the second argument.
+    4. When it reaches back to the head, the second element of the return value
+        is the answer.
+
+- Reasons behind the solution
+
+    This solution performes only one iteration with theta-of 2 space complexity.
+    There's another solution to iterate the linked list over twice; to know the length,
+    then find the node. Compared to this, the solution is better when the linked list
+    is really long.
+
+- Complexities
+
+    * Runtime: O(n)
+    * Space: O(1) - in terms of big-o notation, it is O(1) instead of O(2)

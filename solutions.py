@@ -84,7 +84,7 @@ def question2(a):
 #
 # Question 3
 #
-class Graph:
+class Graph(object):
 
     def __init__(self, v):
         """Creates an instance of Graph.
@@ -184,7 +184,7 @@ def question3(G):
 #
 # Question 4
 #
-class TreeNode:
+class TreeNode(object):
     """Class represents BST node"""
     def __init__(self, data):
         self.data = data
@@ -227,11 +227,41 @@ def question4(T, r, n1, n2):
     if not T[0]:
         return None
     nodes, children = buildBST(T)
-    if children[n1] and children[n2]:
-        root = nodes[r]
-        ancestor = LCA(root, n1, n2)
-        return ancestor.data
-    else:
+    # n1 is not a root but doesn't have any parent
+    if r != n1 and not children[n1]:
+        return None
+    # n2 is not a root but doesn't have any parent
+    if r != n2 and not children[n2]:
         return None
 
+    root = nodes[r]
+    ancestor = LCA(root, n1, n2)
+    return ancestor.data
 
+
+#
+# Question 5
+#
+class Node(object):
+
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def search(head, m):
+    if not head:
+        return [-1, None]
+    result = search(head.next, m)
+    n = result[0] + 1
+    result[0] = n
+    if (n == m):
+        result[1] = head
+    return result
+
+def question5(ll, m):
+    """Given a linked list and the mth value,
+    find a value of mth Node from the end"""
+    result = search(ll, m)
+    if not result[1]:
+        return -1
+    return result[1].data

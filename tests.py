@@ -119,6 +119,47 @@ class TestQuestion4(unittest.TestCase):
         n2 = 4
         self.assertIsNone(solutions.question4(T, r, n1, n2))
 
+    def test_root(self):
+        T = [[0, 1, 0, 0, 0],
+             [0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0],
+             [1, 0, 0, 0, 1],
+             [0, 0, 0, 0, 0]];
+        r = 3
+        n1 = 3
+        n2 = 4
+        self.assertEquals(solutions.question4(T, r, n1, n2), 3)
+
+
+# mth node from the end in a linked list
+class TestQuestion5(unittest.TestCase):
+
+    def createLinkedList(self, ary):
+        node = solutions.Node(ary[0])
+        tmp = node
+        for i in range(1, len(ary)):
+            tmp.next = solutions.Node(ary[i])
+            tmp = tmp.next
+        return node
+
+    def test_none(self):
+        m = 2
+        self.assertEquals(solutions.question5(None, 0), -1)
+
+    def test_one(self):
+        m = 0
+        self.assertEquals(solutions.question5(solutions.Node(0), 0), 0)
+
+    def test_example(self):
+        ll = self.createLinkedList([1, 2, 3, 4, 5])
+        m = 3
+        self.assertEquals(solutions.question5(ll, m), 2)
+
+    def test_example2(self):
+        ll = self.createLinkedList([1, 2, 3, 4, 5])
+        m = 4
+        self.assertEquals(solutions.question5(ll, m), 1)
+
 
 if __name__ == '__main__':
     unittest.main()
