@@ -1,6 +1,6 @@
 # Explanations of questions
 
-## Question1: Substring Anagram
+## Question 1: Substring Anagram
 
 Given two strings, s and t, `anagram_check.py` tests whether some anagram of t
 is a substring of s. If t is the anagram substring, a function question1
@@ -13,7 +13,7 @@ returns True, otherwise, it returns False.
     * Input: two strings
     * Output: True or False
 
-- Assumption
+- Assumptions
 
     * Two strings s and t are all ASCII characters (maximum 256)
     * s is longer than t
@@ -31,7 +31,7 @@ returns True, otherwise, it returns False.
     5. If not, shfts the search window by 1
     6. Repeats 2-4 by the end
 
-- A reason behind the solution
+- Reasons behind the solution
 
     Under an assumption that all input characters are ASCII, those can fit in
     a list of length 256. No matter how long the string is, the frequency list
@@ -46,7 +46,7 @@ returns True, otherwise, it returns False.
 
 
 
-## Question2: Longest Palindromic Substring
+## Question 2: Longest Palindromic Substring
 
 Given a string a, find the longest palindromic substring contained in a.
 
@@ -71,11 +71,11 @@ Given a string a, find the longest palindromic substring contained in a.
         of length one
     3. (base case 2) checks the length two substrings and sets True if two letters
         are the same
-    4. starting from length 3 substrings, checks whether it is palindrome or not based on
-        previous substring length results.
+    4. starting from length 3 substrings, checks whether it is palindrome or not
+        based on previous substring length results.
     5. goes over all lengths up to n
 
-- A reason behind the solution
+- Reasons behind the solution
 
     If comparison is done without the table, the solution will be O(n^3).
     Introduing the table will cut down the performance to O(n^2) while space
@@ -89,7 +89,7 @@ Given a string a, find the longest palindromic substring contained in a.
     * Space: O(n^2)
 
 
-## Question3: Minimum Spanning Tree in Undirected Graph
+## Question 3: Minimum Spanning Tree in Undirected Graph
 
 Given an undirected graph G, find the minimum spanning tree within G
 
@@ -108,7 +108,7 @@ Given an undirected graph G, find the minimum spanning tree within G
      'C': [('B', 5)]}
     ```
 
-- Assumption
+- Assumptions
 
     * All vertices are connected (no island).
     * Vertex names are uppercase alphabets.
@@ -152,7 +152,7 @@ Given an undirected graph G, find the minimum spanning tree within G
     * Space: O(V + E) - for Union-Find it uses 2*V, for graph E, for result E
 
 
-## Question4: The least common ancestor in binary search tree (BST)
+## Question 4: The least common ancestor in binary search tree (BST)
 
 Given two nodes in BST, find the least common ancestor in the BST
 
