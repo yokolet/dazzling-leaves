@@ -84,5 +84,36 @@ class TestMinimumSpanningTree(unittest.TestCase):
         self.assertEquals(solutions.question3(G), expected)
 
 
+class TestLCA(unittest.TestCase):
+
+    def test_none(self):
+        self.assertIsNone(solutions.question4(None, 0, 0, 0))
+
+    def test_empty(self):
+        self.assertIsNone(solutions.question4([[]], 0, 0, 0))
+
+    def test_example(self):
+        T = [[0, 1, 0, 0, 0],
+             [0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0],
+             [1, 0, 0, 0, 1],
+             [0, 0, 0, 0, 0]];
+        r = 3
+        n1 = 1
+        n2 = 4
+        self.assertEquals(solutions.question4(T, r, n1, n2), 3)
+
+    def test_orphan(self):
+        T = [[0, 1, 0, 0, 0],
+             [0, 0, 0, 0, 0],
+             [0, 0, 0, 0, 0],
+             [1, 0, 0, 0, 1],
+             [0, 0, 0, 0, 0]];
+        r = 3
+        n1 = 2
+        n2 = 4
+        self.assertIsNone(solutions.question4(T, r, n1, n2))
+
+
 if __name__ == '__main__':
     unittest.main()

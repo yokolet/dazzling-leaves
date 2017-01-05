@@ -179,3 +179,59 @@ def question3(G):
     # creates a dictionary from result
     adj = adjacencyList(result)
     return adj
+
+
+#
+# Question 4
+#
+class TreeNode:
+    """Class represents BST node"""
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def buildBST(T):
+    """Builds a binary search tree"""
+    size = len(T)
+    nodes = [TreeNode(i) for i in range(size)]
+    children = [False] * size
+    # if row has a value 1 in col, nodes[col] is a child of nodes[row]
+    for row in range(size):
+        for col in range(size):
+            if T[row][col] == 1:
+                children[col] = True  # this node has a parent
+                if nodes[row].data > nodes[col].data:
+                    nodes[row].left = nodes[col]
+                else:
+                    nodes[row].right = nodes[col]
+    return (nodes, children)
+
+def LCA(root, n1, n2):
+    """Finds the least common ancestor node"""
+    if not root:
+        return None
+    if root.data > n1 and root.data > n2:
+        LCA(root.left, n1, n2)
+    elif root.data < n1 and root.data < n2:
+        LCA(root.right, n1. n2)
+    else:
+        return root
+
+def question4(T, r, n1, n2):
+    """Given two dimensional data as a binary search tree, values of
+    root and two node to be compared, returns the value of the least common
+    ancestor value"""
+    if not T:
+        return None
+    if not T[0]:
+        return None
+    nodes, children = buildBST(T)
+    if children[n1] and children[n2]:
+        root = nodes[r]
+        ancestor = LCA(root, n1, n2)
+        return ancestor.data
+    else:
+        return None
+
+

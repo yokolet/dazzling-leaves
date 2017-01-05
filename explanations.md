@@ -129,7 +129,7 @@ Given an undirected graph G, find the minimum spanning tree within G
     6. Chooses the smallest edge except previously chosen
     7. repeats 4 to 6
 
-- A reason behind the solution
+- Reasons behind the solution
 
     For minimum spanning tree solution, there are two major algorithms,
     Prim and Kruskal. Both works well, but we should consider what the given
@@ -150,4 +150,50 @@ Given an undirected graph G, find the minimum spanning tree within G
 
     * Runtime: O(E log(E)) - for sorting O(E log(E)), for looping O(E)
     * Space: O(V + E) - for Union-Find it uses 2*V, for graph E, for result E
+
+
+## Question4: The least common ancestor in binary search tree (BST)
+
+Given two nodes in BST, find the least common ancestor in the BST
+
+### Considerations
+
+- Input and Output
+
+    * Input: 2D matrix (BST), root value, and two node values
+    * Output: an integer respresents a value of the lesat common ancestor
+
+- Assumptions
+
+    * All values in the BST are integers.
+    * The tree has BST properties
+
+- Edge cases
+
+    * Given BST is None or empty
+    * Given node value is not in BST
+
+- Solution
+
+    1. Builds a binary tree from 2D matrix
+    2. Starts from root node, compare root data and given two values
+    3. If both values are less than root value, moves to left
+    4. If both values are greater then root value, moves to right
+    5. If none of above, returns root
+
+- Reasons behind the solution
+
+    To search BST, it's easy to construct a tree. Once the tree is
+    created, the result can be found by a recursive search. The tree
+    has properties of BST, three cases should be considered. Both are greater
+    than root, both are less than root, root is between two. Comparing values,
+    it's clear to go which next.
+    The given example has an orphan node, 2. When 2 is among two values, there's
+    no common ancestor. To know the node is orphan or not, the solution uses
+    a list called children.
+
+- Complexities
+
+    * Runtime: O(n^2) - O(n^2) to build a BST, O(height) (height <= n) to search BST
+    * Space: O(n) - O(n) to save nodes, and O(n) to save children info
 
