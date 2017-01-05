@@ -1,7 +1,8 @@
 import unittest
 import solutions
 
-class TestAnagramCheck(unittest.TestCase):
+# Anagram check
+class TestQuestion1(unittest.TestCase):
 
     def test_none(self):
         self.assertFalse(solutions.question1('any', None))
@@ -25,7 +26,8 @@ class TestAnagramCheck(unittest.TestCase):
         self.assertFalse(solutions.question1(s, t))
 
 
-class TestLongestPalindromicSubstring(unittest.TestCase):
+# the longest palindromic substring
+class TestQuestion2(unittest.TestCase):
 
     def test_none(self):
         a = None
@@ -55,7 +57,9 @@ class TestLongestPalindromicSubstring(unittest.TestCase):
         a = 'aaalllsss'
         self.assertEqual(solutions.question2(a), 'sss')
 
-class TestMinimumSpanningTree(unittest.TestCase):
+
+# minimum spanning tree
+class TestQuestion3(unittest.TestCase):
 
     def test_none(self):
         G = None
@@ -84,7 +88,8 @@ class TestMinimumSpanningTree(unittest.TestCase):
         self.assertEquals(solutions.question3(G), expected)
 
 
-class TestLCA(unittest.TestCase):
+# the least common ancestor
+class TestQuestion4(unittest.TestCase):
 
     def test_none(self):
         self.assertIsNone(solutions.question4(None, 0, 0, 0))
