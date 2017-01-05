@@ -108,7 +108,46 @@ Given an undirected graph G, find the minimum spanning tree within G
      'C': [('B', 5)]}
     ```
 
+- Assumption
+
+    * All vertices are connected (no island).
+    * Vertex names are uppercase alphabets.
+
 - Edge cases
 
     * A given graph is None or empty
-    * 
+
+- Solution
+
+    This solution uses Kruskal's Minimum Spanning Tree Algorithm
+
+    1. Construts a Graph object from a given adjacency list
+    2. Sorts all edges in non-descreasing order by a weight
+    3. Chooses the smallest edge
+    4. Checks if adding the edge creates a cycle or not by Union-Find
+    5. If the cycle won't be created, adds the edge to a result
+    6. Chooses the smallest edge except previously chosen
+    7. repeats 4 to 6
+
+- A reason behind the solution
+
+    For minimum spanning tree solution, there are two major algorithms,
+    Prim and Kruskal. Both works well, but we should consider what the given
+    graph's shape is. If the graph is sparse, Kruskal's algorithm is better for
+    its simple implementation. If the graph has a lot of edges, Prim's algorithm
+    runs faster since it doesn't need to sort all edges.
+
+    Since this problem doesn't mention about how many edges are in the graph,
+    Kruskal's algorithm was used because of its simplicity.
+
+    Another minor consideration is mapping vertex name to index. Keeping edges in
+    a list makes code much more simpler. For this reason, internal experssion uses
+    indices instead of vertex names.
+
+- Complexities
+
+    E: number of edges, V: number of vertices
+
+    * Runtime: O(E log(E)) - for sorting O(E log(E)), for looping O(E)
+    * Space: O(V + E) - for Union-Find it uses 2*V, for graph E, for result E
+

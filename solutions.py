@@ -1,9 +1,7 @@
 #
 # Question 1
 #
-
-# List length to store character frequencies
-LENGTH=256
+LENGTH=256 # List length to store character frequencies
 
 def count(s, start, end):
     """Counts frequencies of characters of a given string s
@@ -41,7 +39,6 @@ def question1(s, t):
 #
 # Question 2
 #
-
 def question2(a):
     """Given a string a, returns the longest palindromic substring in a"""
     # edge cases
@@ -82,3 +79,103 @@ def question2(a):
                 maxLen = l
 
     return a[beginIndex:beginIndex+maxLen]
+
+
+#
+# Question 3
+#
+class Graph:
+
+    def __init__(self, v):
+        """Creates an instance of Graph.
+        An argument v is a number of vertices"""
+        self.V = v      # number of vertices
+        self.edges = [] # a list of all edges
+
+    def addEdge(self, src, dest, weight):
+        """Adds edge to this graph"""
+        self.edges.append([src, dest, weight])
+
+    def find(self, parent, i):
+        """A find method of a Union-Find.
+        Returns a parent number"""
+        if parent[i] == i:
+            return i
+        return self.find(parent, parent[i])
+
+    def union(self, parent, rank, x, y):
+        """An union method of a Union-Find.
+        Updates parent and rank"""
+        xroot = self.find(parent, x)
+        yroot = self.find(parent, y)
+
+        if rank[xroot] < rank[yroot]:
+            parent[xroot] = yroot
+        elif rank[xroot] > rank[yroot]:
+            parent[yroot] = xroot
+        else:
+            parent[yroot] = xroot
+            rank[xroot] += 1
+
+    def mst(self):
+        """Runs Kruskals MST algorithm"""
+        self.edges = sorted(self.edges, key=lambda x: x[2])
+        result = []
+        parent = [i for i in range(self.V)]
+        rank = [0] * self.V
+        i = 0  # index of an edge
+        e = 0  # number of vertices processed so far
+        while e < self.V - 1:
+            src, dest, weight = self.edges[i]
+            i += 1
+            x = self.find(parent, src)
+            y = self.find(parent, dest)
+            if x != y:
+                result.append([src, dest, weight])
+                e += 1
+                self.union(parent, rank, x, y)
+        return result
+
+BASE = ord('A')
+def name_to_index(name):
+    """A helper function to convert vertex name to index"""
+    return ord(name) - BASE
+
+def index_to_name(index):
+    """A helper function to convert index to vertex name"""
+    return chr(index + BASE)
+
+def adjacencyList(result):
+    """A helper function to create a dictionary from list of lists"""
+    adj = {}
+    for [src, dest, weight] in result:
+        src_name = index_to_name(src)
+        dest_name = index_to_name(dest)
+        if src_name in adj:
+            adj[src_name].append((dest_name, weight))
+        else:
+            adj[src_name] = [(dest_name, weight)]
+    return adj
+
+def question3(G):
+    """Given an undirected graph G, finds the minimum spanning tree within G.
+    Both input and outputs are adjacency list in a form of dictionary."""
+    if not G:
+        return None
+    v = len(G)
+    # given graph is empty
+    if v == 0:
+        return None
+
+    # constructs a gragh
+    g = Graph(v)
+    for (src, edges) in G.iteritems():
+        for (dest, weight) in edges:
+            g.addEdge(name_to_index(src), name_to_index(dest), weight)
+
+    # runs MST
+    result = g.mst()
+
+    # creates a dictionary from result
+    adj = adjacencyList(result)
+    return adj

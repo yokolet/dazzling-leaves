@@ -55,6 +55,34 @@ class TestLongestPalindromicSubstring(unittest.TestCase):
         a = 'aaalllsss'
         self.assertEqual(solutions.question2(a), 'sss')
 
+class TestMinimumSpanningTree(unittest.TestCase):
+
+    def test_none(self):
+        G = None
+        self.assertIsNone(solutions.question3(G))
+
+    def test_empty(self):
+        G = {}
+        self.assertIsNone(solutions.question3(G))
+
+    def test_example(self):
+        G = {'A': [('B', 2)],
+             'B': [('A', 2), ('C', 5)],
+             'C': [('B', 5)]}
+        expected = {'A': [('B', 2)],
+                    'C': [('B', 5)]}
+        self.assertEquals(solutions.question3(G), expected)
+
+    def test_more_edges(self):
+        G = {'A': [('B', 1), ('C', 5), ('D', 4)],
+             'B': [('A', 1), ('C', 3), ('D', 2)],
+             'C': [('A', 5), ('B', 3), ('D', 1)],
+             'D': [('A', 4), ('B', 2), ('C', 1)]}
+        expected = {'A': [('B', 1)],
+                    'C': [('D', 1)],
+                    'B': [('D', 2)]}
+        self.assertEquals(solutions.question3(G), expected)
+
 
 if __name__ == '__main__':
     unittest.main()
