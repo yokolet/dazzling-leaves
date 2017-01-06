@@ -199,8 +199,9 @@ Given two nodes in BST, find the least common ancestor in the BST
 
 - Complexities
 
-    * Runtime: O(N) -- O(2N) for child tests, O(N) to find left or right child,
-        and O(log(N)) to search BST. In total, O(3N + log(N)), which reduces to O(N).
+    * Runtime: O(N) -- O(2N) for child tests, O(N) to find left or right child are there.
+        Since the tree may not be well-balanced, searching BST in LCA function takes O(N).
+        In total, O(3N + log(N)), which reduces to O(N).
     * Space: O(N) -- there's no additional data structure explicitly. However,
         LCA function uses O(N) additional space for recursive calls.
         (# of stack frames) * (space per statck frame) = N * 1 = N
@@ -241,7 +242,7 @@ Given a linked list and the number expresses mth, find the mth element from the 
 
 - Reasons behind the solution
 
-    This solution performes only one iteration with theta-of 2 space complexity.
+    This solution performs only one iteration with theta-of 2 space complexity.
     There's another solution to iterate the linked list over twice; to know the length,
     then find the node. Compared to this, the solution is better when the linked list
     is really long.
