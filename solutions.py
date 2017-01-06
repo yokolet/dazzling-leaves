@@ -184,39 +184,37 @@ def question3(G):
 #
 # Question 4
 #
-class TreeNode(object):
-    """Class represents BST node"""
-    def __init__(self, data):
-        self.data = data
-        self.left = None
-        self.right = None
+def left_child(T, node):
+    """Returns a left child of node"""
+    for i in range(0, node):
+        if T[node][i] == 1:
+            return i
+    return None
 
-def buildBST(T):
-    """Builds a binary search tree"""
-    size = len(T)
-    nodes = [TreeNode(i) for i in range(size)]
-    children = [False] * size
-    # if row has a value 1 in col, nodes[col] is a child of nodes[row]
-    for row in range(size):
-        for col in range(size):
-            if T[row][col] == 1:
-                children[col] = True  # this node has a parent
-                if nodes[row].data > nodes[col].data:
-                    nodes[row].left = nodes[col]
-                else:
-                    nodes[row].right = nodes[col]
-    return (nodes, children)
+def right_child(T, node):
+    """Returns a left child of node"""
+    for i in range(node+1, len(T)):
+        if T[node][i] == 1:
+            return i
+    return None
 
-def LCA(root, n1, n2):
+def LCA(T, root, n1, n2):
     """Finds the least common ancestor node"""
     if not root:
         return None
-    if root.data > n1 and root.data > n2:
-        LCA(root.left, n1, n2)
-    elif root.data < n1 and root.data < n2:
-        LCA(root.right, n1. n2)
+    if root > n1 and root > n2:
+        return LCA(T, left_child(T, root), n1, n2)
+    elif root < n1 and root < n2:
+        return LCA(T, right_child(T, root), n1, n2)
     else:
         return root
+
+def is_child(T, node):
+    """Returns True if node is a part of BST, otherwise False"""
+    for i in range(len(T)):
+        if T[i][node] == 1:
+            return True
+    return False
 
 def question4(T, r, n1, n2):
     """Given two dimensional data as a binary search tree, values of
@@ -226,17 +224,15 @@ def question4(T, r, n1, n2):
         return None
     if not T[0]:
         return None
-    nodes, children = buildBST(T)
-    # n1 is not a root but doesn't have any parent
-    if r != n1 and not children[n1]:
+
+    # both n1 and n2 should be nodes in BST
+    if n1 != r and not is_child(T, n1):
         return None
-    # n2 is not a root but doesn't have any parent
-    if r != n2 and not children[n2]:
+    if n2 != r and not is_child(T, n2):
         return None
 
-    root = nodes[r]
-    ancestor = LCA(root, n1, n2)
-    return ancestor.data
+    ancestor = LCA(T, r, n1, n2)
+    return ancestor
 
 
 #

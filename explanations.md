@@ -16,7 +16,7 @@ returns True, otherwise, it returns False.
 - Assumptions
 
     * Two strings s and t are all ASCII characters (maximum 256)
-    * s is longer than t
+    * s is much longer than t
 
 - Edge cases
 
@@ -41,8 +41,10 @@ returns True, otherwise, it returns False.
 
 - Complexities
 
-    * Runtime: O(n)
-    * Space: O(1), (It is big-theta of 256, which is considered O(1))
+    M: length of t, N: length of s
+
+    * Runtime: O(MN) -- from the assumption, M is much smaller than N, O(MN)
+    * Space: O(1) --  big-theta of 256, which reduces to O(1)
 
 
 
@@ -77,16 +79,16 @@ Given a string a, find the longest palindromic substring contained in a.
 
 - Reasons behind the solution
 
-    If comparison is done without the table, the solution will be O(n^3).
-    Introduing the table will cut down the performance to O(n^2) while space
-    complexity will increase from 1 to O(n^2). If the string length gets longer,
-    the difference between O(n^3) and O(n^2) grows big. That's why this solution
+    If comparison is done without the table, the solution will be O(N^3).
+    Introduing the table will cut down the performance to O(N^2) while space
+    complexity will increase from 1 to O(N^2). If the string length gets longer,
+    the difference between O(N^3) and O(N^2) grows big. That's why this solution
     uses the table to save previous results.
 
 - Complexities
 
-    * Runtime: O(n^2)
-    * Space: O(n^2)
+    * Runtime: O(N^2)
+    * Space: O(N^2)
 
 
 ## Question 3: Minimum Spanning Tree in Undirected Graph
@@ -148,8 +150,8 @@ Given an undirected graph G, find the minimum spanning tree within G
 
     E: number of edges, V: number of vertices
 
-    * Runtime: O(E log(E)) - for sorting O(E log(E)), for looping O(E)
-    * Space: O(V + E) - for Union-Find it uses 2*V, for graph E, for result E
+    * Runtime: O(E log(E)) -- for sorting O(E log(E)), for looping O(E)
+    * Space: O(V + E) -- for Union-Find it uses 2*V, for graph E, for result E
 
 
 ## Question 4: The least common ancestor in binary search tree (BST)
@@ -175,27 +177,31 @@ Given two nodes in BST, find the least common ancestor in the BST
 
 - Solution
 
-    1. Builds a binary tree from 2D matrix
-    2. Starts from root node, compare root data and given two values
-    3. If both values are less than root value, moves to left
-    4. If both values are greater then root value, moves to right
-    5. If none of above, returns root
+    1. Starts from root node, compare root data and given two values
+    2. If both values are less than root value, moves to left
+    3. If both values are greater then root value, moves to right
+    4. If none of above, returns root
 
 - Reasons behind the solution
 
-    To search BST, it's easy to construct a tree. Once the tree is
-    created, the result can be found by a recursive search. The tree
-    has properties of BST, three cases should be considered. Both are greater
-    than root, both are less than root, root is between two. Comparing values,
-    it's clear to go which next.
-    The given example has an orphan node, 2. When 2 is among two values, there's
-    no common ancestor. To know the node is orphan or not, the solution uses
-    a list called children.
+    Without constructing BST, the solution looks up matrix. Each row number
+    in matrix corresponds to node data. If the root is 3, the 4th row will be
+    the starting point (zero based). Looking at this row, the solution finds
+    left or right child row. Next step looks at the child row and finds
+    child's left or right child row.
+
+    Given tree has properties of BST, so three cases should be considered.
+    Both are greater than root, both are less than root, root is between two.
+    Comparing values (row number), it's clear to go left or right next.
+    The given example has an orphan node, 2. When 2 is one of given two values,
+    there's no common ancestor. To know the node is orphan or not, the solution
+    tests whether the node is a part of BST or not before tree is searched.
 
 - Complexities
 
-    * Runtime: O(n^2) - O(n^2) to build a BST, O(height) (height <= n) to search BST
-    * Space: O(n) - O(n) to save nodes, and O(n) to save children info
+    * Runtime: O(N) -- O(2N) for child tests, O(N) to find left or right child,
+        and O(log(N)) to search BST. In total, O(3N + log(N)), which reduces to O(N).
+    * Space: O(1) -- there's no additional list, just values.
 
 
 ## Question 5: The mth element from the end in a linked list
@@ -240,5 +246,5 @@ Given a linked list and the number expresses mth, find the mth element from the 
 
 - Complexities
 
-    * Runtime: O(n)
-    * Space: O(1) - in terms of big-o notation, it is O(1) instead of O(2)
+    * Runtime: O(N)
+    * Space: O(1) -- in terms of big-o notation, it is O(1) instead of O(2)

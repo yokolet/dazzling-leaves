@@ -91,6 +91,21 @@ class TestQuestion3(unittest.TestCase):
 # the least common ancestor
 class TestQuestion4(unittest.TestCase):
 
+    T = [[0, 1, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [0, 0, 0, 0, 0],
+         [1, 0, 0, 0, 1],
+         [0, 0, 0, 0, 0]];
+
+    T2 = [[0, 0, 0, 0, 0, 0, 0],
+          [1, 0, 1, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 0, 0],
+          [0, 1, 0, 0, 0, 1, 0],
+          [0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 1, 0, 1],
+          [0, 0, 0, 0, 0, 0, 0]];
+
+
     def test_none(self):
         self.assertIsNone(solutions.question4(None, 0, 0, 0))
 
@@ -98,37 +113,34 @@ class TestQuestion4(unittest.TestCase):
         self.assertIsNone(solutions.question4([[]], 0, 0, 0))
 
     def test_example(self):
-        T = [[0, 1, 0, 0, 0],
-             [0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 0],
-             [1, 0, 0, 0, 1],
-             [0, 0, 0, 0, 0]];
         r = 3
         n1 = 1
         n2 = 4
-        self.assertEquals(solutions.question4(T, r, n1, n2), 3)
+        self.assertEquals(solutions.question4(self.T, r, n1, n2), 3)
 
     def test_orphan(self):
-        T = [[0, 1, 0, 0, 0],
-             [0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 0],
-             [1, 0, 0, 0, 1],
-             [0, 0, 0, 0, 0]];
         r = 3
         n1 = 2
         n2 = 4
-        self.assertIsNone(solutions.question4(T, r, n1, n2))
+        self.assertIsNone(solutions.question4(self.T, r, n1, n2))
 
     def test_root(self):
-        T = [[0, 1, 0, 0, 0],
-             [0, 0, 0, 0, 0],
-             [0, 0, 0, 0, 0],
-             [1, 0, 0, 0, 1],
-             [0, 0, 0, 0, 0]];
         r = 3
         n1 = 3
         n2 = 4
-        self.assertEquals(solutions.question4(T, r, n1, n2), 3)
+        self.assertEquals(solutions.question4(self.T, r, n1, n2), 3)
+
+    def test_bigger_tree_right(self):
+        r = 3
+        n1 = 4
+        n2 = 6
+        self.assertEquals(solutions.question4(self.T2, r, n1, n2), 5)
+
+    def test_bigger_tree_left(self):
+        r = 3
+        n1 = 2
+        n2 = 0
+        self.assertEquals(solutions.question4(self.T2, r, n1, n2), 1)
 
 
 # mth node from the end in a linked list
