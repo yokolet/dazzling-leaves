@@ -28,7 +28,7 @@ returns True, otherwise, it returns False.
     2. Finds a character frequency a search window in s and saves in a list
     3. If both frequency list are identical, t's anagram is a substring of s
     4. Returns True if t's anagram is a substring of s.
-    5. If not, shfts the search window by 1
+    5. If not, shifts the search window by 1
     6. Repeats 2-4 by the end
 
 - Reasons behind the solution
@@ -80,7 +80,7 @@ Given a string a, find the longest palindromic substring contained in a.
 - Reasons behind the solution
 
     If comparison is done without the table, the solution will be O(N^3).
-    Introduing the table will cut down the performance to O(N^2) while space
+    Introducing the table will cut down the performance to O(N^2) while space
     complexity will increase from 1 to O(N^2). If the string length gets longer,
     the difference between O(N^3) and O(N^2) grows big. That's why this solution
     uses the table to save previous results.
@@ -123,7 +123,7 @@ Given an undirected graph G, find the minimum spanning tree within G
 
     This solution uses Kruskal's Minimum Spanning Tree Algorithm
 
-    1. Construts a Graph object from a given adjacency list
+    1. Constructs a Graph object from a given adjacency list
     2. Sorts all edges in non-descreasing order by a weight
     3. Chooses the smallest edge
     4. Checks if adding the edge creates a cycle or not by Union-Find
@@ -201,7 +201,9 @@ Given two nodes in BST, find the least common ancestor in the BST
 
     * Runtime: O(N) -- O(2N) for child tests, O(N) to find left or right child,
         and O(log(N)) to search BST. In total, O(3N + log(N)), which reduces to O(N).
-    * Space: O(1) -- there's no additional list, just values.
+    * Space: O(N) -- there's no additional data structure explicitly. However,
+        LCA function uses O(N) additional space for recursive calls.
+        (# of stack frames) * (space per statck frame) = N * 1 = N
 
 
 ## Question 5: The mth element from the end in a linked list
@@ -247,4 +249,6 @@ Given a linked list and the number expresses mth, find the mth element from the 
 - Complexities
 
     * Runtime: O(N)
-    * Space: O(1) -- in terms of big-o notation, it is O(1) instead of O(2)
+    * Space: O(N) -- For return data, O(2) is used in search function.
+        Additionally, it uses recursive calls, so it need O(N) space, which is
+        calculated by (# of stack frames) * (space per statck frame) = N * 1 = N
